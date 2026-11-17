@@ -1,0 +1,21 @@
+idf_component_register(
+    SRCS
+        "app_main.c"
+        "bridge.c"
+        "cube_model.c"
+        "move_led.c"
+        "moyu_client.c"
+        "moyu_codec.c"
+        "qy_codec.c"
+        "qy_server.c"
+        "runtime.c"
+        "selftest.c"
+    INCLUDE_DIRS "."
+    REQUIRES
+        nvs_flash
+        bt
+        mbedtls
+        esp_timer
+        esp_hw_support
+        esp_driver_rmt
+)

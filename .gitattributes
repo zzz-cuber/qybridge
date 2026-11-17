@@ -1,0 +1,8 @@
+# 统一用 LF，避免 Windows 检出时把换行改来改去
+* text=auto eol=lf
+
+# 二进制文件不要做换行转换
+*.bin binary
+*.png binary
+*.jpg binary
+*.pdf binary

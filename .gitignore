@@ -1,0 +1,26 @@
+# 构建产物
+build/
+build-*/
+sdkconfig
+sdkconfig.old
+
+# 编译好的固件（通过 GitHub Releases 发布，不入库）
+release/*.bin
+*.bin
+*.elf
+*.map
+
+# 调试日志（可能含本机设备 MAC / 串口路径）
+logs/
+*.log
+
+# 编辑器 / 系统垃圾
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
