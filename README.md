@@ -67,17 +67,29 @@
 
 ### 1. 烧录（不需要开发环境）
 
-从本仓库的 **Releases** 下载 `qybridge-esp32s3-merged.bin`，烧到地址 **`0x0`**：
+**完整教程（驱动、串口识别、进下载模式、报错排查）见
+[`docs/05-烧录教程.md`](docs/05-烧录教程.md)。** 这里是最短路径：
 
-* 网页工具 <https://esptool.spacehuhn.com/>：Connect → 选串口 → 选 bin → 地址填 `0x0` → Program
-* 或命令行：
+1. 从 [Releases](../../releases/latest) 下载 `qybridge-esp32s3-merged.bin`；
+2. 用 **USB 数据线**（不是充电线）把板子插到电脑；
+3. 用 Chrome/Edge 打开 <https://esptool.spacehuhn.com/> → **Connect** → 选串口
+   （**别选名字带"蓝牙"的那个**）；
+4. 文件选刚下载的 bin，**地址填 `0x0`**；
+5. 点 **Program**，等进度到 100%；
+6. 烧完**拔插一次 USB**（或按一下 RST / EN），板子开始运行。
 
-  ```bash
-  esptool.py --chip esp32s3 -p COM6 -b 460800 write_flash 0x0 qybridge-esp32s3-merged.bin
-  ```
+命令行等价操作：
 
-> 合并镜像会覆盖 NVS（配对记录），烧完重新转一下魔方让它重新发现即可。
-> 只想更新应用、保留配对：烧 `qybridge-esp32s3.bin` 到 `0x10000`。
+```bash
+esptool.py --chip esp32s3 -p COM6 -b 460800 write_flash 0x0 qybridge-esp32s3-merged.bin
+```
+
+**烧完怎么确认成功**：串口（115200）应打印
+`===== 自检全部通过 =====` 和 `广播中: QY-QYSC-S-XXXX`；上电时灯不亮是正常的，
+只有转译动作时才闪。
+
+> ⚠️ 合并镜像会**覆盖 NVS（配对记录）**，烧完要重新"转一下魔方"让它重新发现。
+> 只想更新应用、保留配对：把 `qybridge-esp32s3.bin` 烧到 `0x10000`。
 
 ### 2. 使用
 
@@ -169,6 +181,7 @@ docs/
   02-DNF根因分析.md   "步骤不完整"到底怎么来的（含实测结论）
   03-架构与不变量.md  设计约束
   04-验收清单.md      比赛前逐项过
+  05-烧录教程.md      从零烧录：驱动、串口、下载模式、报错排查
 tools/
   serial_capture.py  抗掉线的串口日志抓取工具
 ```
